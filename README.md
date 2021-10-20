@@ -1,3 +1,3 @@
 # Game_The_Dice
 
-little game to throw dice
+Little game to throw dice
