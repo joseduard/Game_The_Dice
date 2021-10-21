@@ -78,12 +78,34 @@ function cleanBoard() {
 // C'est ici que l'on doit capturer le click sur le bouton
 
 var playButton = document.querySelector('#play');
-
-function launchPlay (params) {
+//L'object "event" est envoye en argument à toutes les fucntions handler utilise dans un ecouteur d'evenement
+// on as pas la main sur un argument de un handler
+function launchPlay (event) {
+  console.log('event'+ event);
   play(5)
+  
 }
 
 // On utilise la méthode "ajouter un écouteur d'evenement"
 // 1-dans le premier argument on le precise quel évenement on veut écouter (click)
-// 2-comme deuxieme argument on lui donne la function sans l'executer play, il devra executer au momeny l'évenement sera déclanche. ç'appelle "Handler"
+// 2-comme deuxieme argument on lui donne la function sans l'executer play, il devra executer au momeny l'évenement sera déclanche. ç'appelle "Handler" ou callback !
+//la fucntion fourbi en 2eme argument (callback) sera ececute au  moment l'utilisateur va clicker, c'est le principe asynchrone de js
+//Voici un ecouteur de event sur un seul élement
 playButton.addEventListener('click', launchPlay )
+
+// sinon:
+// le bubbling, c'est un ecouteur de evenement ou capturing
+// evt c'est un objet
+// Voici un ecouteur de event sur le document
+document.addEventListener('click', function (evt) {
+  // JS une fois l'evenement déclanche renvoi automatiquement en argument l'évenement déclanché. On peut do recuperer cette valeur dans une propriété que l'on a nommé comme on le souhaitait
+  console.log(evt);
+  // Dans cette objet on a plusierus informations concernant cet évenement, dont la liste des élément DOM que le clic à "traversé"
+  // C'est evt est de type MouseEvent, car il est issu d'un click qui est un evenement de souris
+  // Ainsi que l'element le plus haut de la pile c'est à dire le premier qu'il a traversé
+  // c'est une propriete du object evt
+  var elementClicked = evt.target
+  console.log('Tu as clicke sur: ' + elementClicked.id)
+  
+} );
+// A chaque click il va re executer la function fourni en deuxieme argument appelle callback et handler quand s'agis d'un callback d'évenement
