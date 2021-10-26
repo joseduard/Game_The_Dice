@@ -10,8 +10,11 @@
 
 <body>
     <!-- j'ai créé mon button -->
-    <div>
-        <button id="play">Lancer 5 dés pour les 2 joueurs</button>
+    <div class="Game--config">
+        <label class="label--button">Choisir le nombre de dés</label>
+        <input type='range'id="numberOfDice"min="1" max="6" value="1">
+        <span id="showNumberOfDice">1</span>
+        <button id="play">Lancer les dés pour les 2 joueurs</button>
     </div>
     <div id="app">
         <div class="board" id="player"></div>

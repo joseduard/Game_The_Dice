@@ -1,12 +1,12 @@
-// Avec cette fucntion je vais créer mon nombre aleatoire
+// Avec cette function je vais créer mon nombre aleatoire
 function generateRandomValue(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
+// ici est une variable global qui est acesible partotu car est en la base du script
+var numberOfDice = 1;
 // le parametre targetId va contenir soit "player" soit "dealer"
 function createDiceInDom(targetId) {
-  console.log(
-    "Je suis la valeur de target id apres le querySelectro " + targetId
-  );
+  //console.log("Je suis la valeur de target id apres le querySelectro " + targetId);
   // je vais créer ma div myDice, ella va contenir l'element div avec la class dice
   var myDice = document.createElement("div");
   // on ajoute la class dice a cette div
@@ -19,7 +19,7 @@ function createDiceInDom(targetId) {
   board.appendChild(myDice);
   // je vais déclancher la function generateRandomValue en lui donnan comment arguments 1 et 6
   var roll = generateRandomValue(1, 6);
-  console.log(roll);
+  //console.log(roll);
   var angle = generateRandomValue(0, 90);
 
   //On se sert du nombre obtenu pour modifier la POSITION de l'arrière plan du dé
@@ -29,7 +29,7 @@ function createDiceInDom(targetId) {
   // Donc je peux en conclure qu'il faille que soustraire 1 au lancer de dé et que je le multiplie par -100
   // (roll - 1) * -100
   var diceBackgroundHorizontalPosition = (roll - 1) * -100;
-  console.log("Valeur de dice: " + diceBackgroundHorizontalPosition);
+  // console.log("Valeur de dice: " + diceBackgroundHorizontalPosition);
 
   // Maintenant il va falloir appliquer cette valeur à la propriété background-position-x du dé en précisant que ce sont des pixels
   //! Attention en JavaScript les propriété css sont réécrite en camelCase, car il ne peux pa utiliser le kebab-case
@@ -51,17 +51,29 @@ function createDiceInDom(targetId) {
 
 function play(numberOfDice) {
   cleanBoard();
-  console.log("que hago yo ?" + cleanBoard)
+  //console.log("que hago yo ?" + cleanBoard)
   // Et enfin executer les fonction autant de fois que de dés demandés par l'utilisateur
   // Pour un compteur qui commence à 0, tant que ce compteur est inférieur au nombre de dé demander par l'utilisateur, on exécute la liste d'instruction et on incrémente le compteur
   // A chaque tour de boucle on créer un dé pour jouer et un dé pour le dealer
   // le for /initialize counter/ en tant que condition true/ update counter {alors ti fait quelque chose}
   for (var diceCounter = 0; diceCounter < numberOfDice; diceCounter++) {
-    console.log("La valeur de diceCounter au debut est:" + diceCounter);
+    //console.log("La valeur de diceCounter au debut est:" + diceCounter);
     // On exécute la function charger de créer un dé dans le DOM avecs ses arguments
     // On créer un dé pour le dealer et pour le player
     createDiceInDom("player");
+    
+  }
+  // j'execute cette methode sans sortir de la boucle
+  setTimeout(dealer, 2000)
+}
+
+function dealer() {
+  for (var diceCounter = 0; diceCounter < numberOfDice; diceCounter++) {
+    //console.log("La valeur de diceCounter au debut est:" + diceCounter);
+    // On exécute la function charger de créer un dé dans le DOM avecs ses arguments
+    // On créer un dé pour le dealer et pour le player
     createDiceInDom("dealer");
+    
   }
 }
 
@@ -82,7 +94,7 @@ var playButton = document.querySelector('#play');
 // on as pas la main sur un argument de un handler
 function launchPlay (event) {
   console.log('event'+ event);
-  play(5)
+  play(numberOfDice)
   
 }
 
@@ -93,19 +105,33 @@ function launchPlay (event) {
 //Voici un ecouteur de event sur un seul élement
 playButton.addEventListener('click', launchPlay )
 
+playButton.addEventListener('mouseover', function () {
+  // console.log('tu passes ta souris sur l bouton play')
+})
+
+// je veux pouvoir modifier le nombre de dés afficher dans le span a droite du slider
+// Pour cela je vais écouté les évenements sur le slider, donc j'ajoite un ecouteur d'évenement en particuler: cle changement de valeur 
+var slider = document.querySelector('#numberOfDice');
+slider.addEventListener('change',function (event) {
+  // le type d'evenement change est déclanche a chaque fois que un valeur html est modifie
+  console.log('a changer de valeur');
+  numberOfDice = event.target.value
+  document.querySelector('#showNumberOfDice').textContent = numberOfDice
+});
+
 // sinon:
 // le bubbling, c'est un ecouteur de evenement ou capturing
 // evt c'est un objet
 // Voici un ecouteur de event sur le document
 document.addEventListener('click', function (evt) {
   // JS une fois l'evenement déclanche renvoi automatiquement en argument l'évenement déclanché. On peut do recuperer cette valeur dans une propriété que l'on a nommé comme on le souhaitait
-  console.log(evt);
+  //console.log(evt);
   // Dans cette objet on a plusierus informations concernant cet évenement, dont la liste des élément DOM que le clic à "traversé"
   // C'est evt est de type MouseEvent, car il est issu d'un click qui est un evenement de souris
   // Ainsi que l'element le plus haut de la pile c'est à dire le premier qu'il a traversé
   // c'est une propriete du object evt
   var elementClicked = evt.target
-  console.log('Tu as clicke sur: ' + elementClicked.id)
+  //console.log('Tu as clicke sur: ' + elementClicked.id)
   
 } );
 // A chaque click il va re executer la function fourni en deuxieme argument appelle callback et handler quand s'agis d'un callback d'évenement

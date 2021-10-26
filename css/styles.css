@@ -1,33 +1,80 @@
 body {
-    background-color: #f39c12;
-  }
-  
-  #app {
-    display: flex;
-  }
-  
-  #player {
-    background-color: #f39c12;
-  }
-  
-  #dealer {
-    background-color: #e67e22;
-  }
-  
-  .board {
-    min-height: 100vh;
-    width:100%;
-    display:flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-  }
-  
-  .dice {
-    background-image: url('/images/dice-sprite.png');
-    width: 100px;
-    height: 100px;
-    margin: 1em;
-    background-position-x: 0px;
-  }
+  background-color: #f39c12;
+}
+
+.Game--config{
+  padding: 1rem;
+}
+
+.label--button {
+  color: #804d20;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 1rem;
+  text-shadow: 0 0 1px rgb(0, 0, 0);
+}
+
+#showNumberOfDice {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+#play {
+  border: 0;
+  font-weight: bold;
+  line-height: 2.5;
+  padding: 0 20px;
+  font-size: 1rem;
+  text-align: center;
+  color: #fff;
+  text-shadow: 1px 1px 1px #000;
+  border-radius: 10px;
+  background-color: rgb(254 87 9);
+  background-image: linear-gradient(to top left,
+                                    rgba(0, 0, 0, .2),
+                                    rgba(0, 0, 0, .2) 30%,
+                                    rgba(0, 0, 0, 0));
+  box-shadow: inset 2px 2px 3px rgba(255, 255, 255, .6),
+              inset -2px -2px 3px rgba(0, 0, 0, .6);
+
+
+}
+
+#play:hover {
+  background-color: rgb(202, 17, 17);
+}
+
+#styled:active {
+  box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+              inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
+
+#app {
+  display: flex;
+}
+
+#player {
+  background-color: #f39c12;
+}
+
+#dealer {
+  background-color: #e67e22;
+}
+
+.board {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+}
+
+.dice {
+  background-image: url('/images/dice-sprite.png');
+  width: 100px;
+  height: 100px;
+  margin: 1em;
+  background-position-x: 0px;
+}
